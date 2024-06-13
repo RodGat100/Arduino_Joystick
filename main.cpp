@@ -37,7 +37,7 @@ bool includeRudder = true;
 void setup() {
     // Initialize Button Pins
     for (int i = 0; i < 10; i++){
-            pinMode(JoyButton[i], INPUT_PULLUP);
+            pinMode(joyButton[i], INPUT_PULLUP);
     }
 
     Joystick.begin();
