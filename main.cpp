@@ -9,12 +9,12 @@
 #define Rudder A5
 
 // pinos dos botões
-#define JoyButton1 9
-#define JoyButton2 10
-#define JoyButton3 11
-#define JoyButton4 12
-#define JoyButton5 13
-#define JoyButton6 14 // Favor inserir pino correto, só pus um número para a sintaxe ficar correta
+#define joyButton1 9
+#define joyButton2 10
+#define joyButton3 11
+#define joyButton4 12
+#define joyButton5 13
+#define joyButton6 14 // Favor inserir pino correto, só pus um número para a sintaxe ficar correta
 
 // pinos dos botões que controlam eixos
 #define XButtonPlus 2  // Checar se esses 4 pinos estão corretos
