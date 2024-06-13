@@ -1,26 +1,26 @@
 #include <Joystick.h>
 
 // pinos dos potenciômetros
-#define Throttle A0;
-#define RxAxis A1;
-#define RyAxis A2;
-#define RzAxis A3;
-#define ZAxis A4;
-#define Rudder A5;
+#define Throttle A0
+#define RxAxis A1
+#define RyAxis A2
+#define RzAxis A3
+#define ZAxis A4
+#define Rudder A5
 
 // pinos dos botões
-#define JoyButton1 9;
-#define JoyButton2 10;
-#define JoyButton3 11;
-#define JoyButton4 12;
-#define JoyButton5 13;
-#define JoyButton6 14; // Favor inserir pino correto, só pus um número para a sintaxe ficar correta
+#define JoyButton1 9
+#define JoyButton2 10
+#define JoyButton3 11
+#define JoyButton4 12
+#define JoyButton5 13
+#define JoyButton6 14 // Favor inserir pino correto, só pus um número para a sintaxe ficar correta
 
 // pinos dos botões que controlam eixos
-#define XButtonPlus 2;  // Checar se esses 4 pinos estão corretos
-#define XButtonMinus 3;
-#define YButtonPlus 4;
-#define YButtonMinus 5;
+#define XButtonPlus 2  // Checar se esses 4 pinos estão corretos
+#define XButtonMinus 3
+#define YButtonPlus 4
+#define YButtonMinus 5
 
 
 Joystick_ Joystick(0x03, JOYSTICK_TYPE_JOYSTICK,
@@ -56,11 +56,11 @@ bool includeRudder = true;
 void setup() {
   // Initialize Button Pins
 
-    pinMode(Joybutton1, INPUT_PULLUP);
-    pinMode(Joybutton2, INPUT_PULLUP);
-    pinMode(Joybutton3, INPUT_PULLUP);
-    pinMode(Joybutton4, INPUT_PULLUP);
-    pinMode(Joybutton5, INPUT_PULLUP);
+    pinMode(JoyButton1, INPUT_PULLUP);
+    pinMode(JoyButton2, INPUT_PULLUP);
+    pinMode(JoyButton3, INPUT_PULLUP);
+    pinMode(JoyButton4, INPUT_PULLUP);
+    pinMode(JoyButton5, INPUT_PULLUP);
     pinMode(XButtonPlus, INPUT_PULLUP);
     pinMode(XButtonMinus, INPUT_PULLUP);
     pinMode(YButtonPlus, INPUT_PULLUP);
