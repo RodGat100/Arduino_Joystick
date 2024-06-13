@@ -9,26 +9,15 @@
 #define Rudder A5
 
 // pinos dos botões
-#define joyButton1 9
-#define joyButton2 10
-#define joyButton3 11
-#define joyButton4 12
-#define joyButton5 13
-#define joyButton6 14 // Favor inserir pino correto, só pus um número para a sintaxe ficar correta
+const int joyButton[10] = {9, 10, 11, 12, 13, 14, 2, 3, 4, 5};  // Pino para cada botão de Joystick
 
-// pinos dos botões que controlam eixos
-#define XButtonPlus 2  // Checar se esses 4 pinos estão corretos
-#define XButtonMinus 3
-#define YButtonPlus 4
-#define YButtonMinus 5
+// declara última posição conhecida de cada um dos 10 botões
+int lastButtonState[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
+// declara posição medida de cada botão
+int currentButtonState[10] = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-Joystick_ Joystick(0x03, JOYSTICK_TYPE_JOYSTICK,
-        6, 0,  // 6 botões e nenhum hat switch
-        true,true,true,true,true,true,true,true,true,true,true); // 11 eixos
-
-const bool initAutosendState = true;
-
+// inicializa variáveis para os eixos
 int throttle_=0;
 int rxAxis_=0;
 int ryAxis_=0;
@@ -36,48 +25,30 @@ int rzAxis_=0;
 int zAxis_=0;
 int rudder_=0;
 
-int lastButton1State=0;
-int lastButton2State=0;
-int lastButton3State=0;
-int lastButton4State=0;
-int lastButton5State=0;
-int lastButton6State=0;
 
-int currentButton1State;
-int currentButton2State;
-int currentButton3State;
-int currentButton4State;
-int currentButton5State;
-int currentButton6State;
+Joystick_ Joystick(0x03, JOYSTICK_TYPE_JOYSTICK,
+        6, 0,  // 6 botões e nenhum hat switch
+        true,true,true,true,true,true,true,true,true,true,true); // 11 eixos
 
-int currentButtonState;
-int lastButtonState[4] = {0,0,0,0};
- 
+const bool initAutosendState = true; // Acho que esta linha não está adicionando nada
 bool includeZaxis = true;
 bool includeRudder = true;
 
 void setup() {
-  // Initialize Button Pins
-
-    pinMode(JoyButton1, INPUT_PULLUP);
-    pinMode(JoyButton2, INPUT_PULLUP);
-    pinMode(JoyButton3, INPUT_PULLUP);
-    pinMode(JoyButton4, INPUT_PULLUP);
-    pinMode(JoyButton5, INPUT_PULLUP);
-    pinMode(JoyButton6, INPUT_PULLUP);
-        
-    pinMode(XButtonPlus, INPUT_PULLUP);
-    pinMode(XButtonMinus, INPUT_PULLUP);
-    pinMode(YButtonPlus, INPUT_PULLUP);
-    pinMode(YButtonMinus, INPUT_PULLUP);
+    // Initialize Button Pins
+    for (int i = 0; i < 10; i++){
+            pinMode(JoyButton[i], INPUT_PULLUP);
+    }
 
     Joystick.begin();
     Joystick.setXAxisRange(-1, 1);
     Joystick.setYAxisRange(-1, 1);
+    Joystick.setAcceleratorRange(-1,1);
 }
 
 
-void loop() {
+void loop()
+{
     
     // medição dos 6 eixos analógicos em 10 bits,
     // mapeia para 8 bits e e envia para Joystick
@@ -109,87 +80,105 @@ void loop() {
     // Faz leitura dos 6 botões, se estado do botão mudou,
     // atualiza posição do botão no Joystick
 
-    currentButton1State = !digitalRead(joyButton1);
-    if (currentButton1State != lastButton1State)
-    {
-        Joystick.setButton (0, currentButton1State);
-        lastButton1State = currentButton1State;
-    }
+        
+    //currentButton1State = !digitalRead(joyButton1);
+    //if (currentButton1State != lastButton1State)
+    //{
+    //    Joystick.setButton (0, currentButton1State);
+    //    lastButton1State = currentButton1State;
+    //}
     
-    currentButton2State = !digitalRead(joyButton2);
-    if (currentButton2State != lastButton2State)
-    {
-        Joystick.setButton (0, currentButton2State);
-        lastButton2State = currentButton2State;
-    }
+    //currentButton2State = !digitalRead(joyButton2);
+    //if (currentButton2State != lastButton2State)
+    //{
+    //    Joystick.setButton (0, currentButton2State);
+    //    lastButton2State = currentButton2State;
+    //}
 
-    currentButton3State = !digitalRead(joyButton3);
-    if (currentButton3State != lastButton3State)
-    {
-        Joystick.setButton (0, currentButton3State);
-        lastButton3State = currentButton3State;
-    }
+    //currentButton3State = !digitalRead(joyButton3);
+    //if (currentButton3State != lastButton3State)
+    //{
+    //    Joystick.setButton (0, currentButton3State);
+    //    lastButton3State = currentButton3State;
+    //}
 
-    currentButton4State = !digitalRead(joyButton4);
-    if (currentButton4State != lastButton4State)
-    {
-        Joystick.setButton (0, currentButton4State);
-        lastButton4State = currentButton4State;
-    }
+    //currentButton4State = !digitalRead(joyButton4);
+    //if (currentButton4State != lastButton4State)
+    //{
+    //    Joystick.setButton (0, currentButton4State);
+    //    lastButton4State = currentButton4State;
+    //}
 
-    currentButton5State = !digitalRead(joyButton5);
-    if (currentButton5State != lastButton5State)
-    {
-        Joystick.setButton (0, currentButton5State);
-        lastButton5State = currentButton5State;
-    }
+    //currentButton5State = !digitalRead(joyButton5);
+    //if (currentButton5State != lastButton5State)
+    //{
+    //    Joystick.setButton (0, currentButton5State);
+    //    lastButton5State = currentButton5State;
+    //}
 
-    currentButton6State = !digitalRead(joyButton6);
-    if (currentButton6State != lastButton6State)
-    {
-        Joystick.setButton (0, currentButton6State);
-        lastButton6State = currentButton6State;
-    }
+    //currentButton6State = !digitalRead(joyButton6);
+    //if (currentButton6State != lastButton6State)
+    //{
+    //    Joystick.setButton (0, currentButton6State);
+    //    lastButton6State = currentButton6State;
+    //}
  
-
-   
     // Para os botões que mexem os eixos
-    for (int index = 0; index < 4; index++)
-            {
-        currentButtonState = !digitalRead(index + 2); // O 2 está aí pois o 1o pino é o 2, e só funciona se for para os pinos subsequentes 3,4,5
-        if (currentButtonState != lastButtonState[index])
+    for (int index = 0; index < 10; index++)
+    { 
+        currentButtonState[index] = !digitalRead(joyButton[index]);
+        if (currentButtonState[index] != lastButtonState[index])
         {
-            switch (index) {
-                case 0: // XButtonPlus
+            switch (index)
+            {
+                case 0: // pino 9, flape up
+                    if (currentButtonState [index] == 1) {
+                        Joystick.setAccelerator(-1);
+                    } else {
+                        Joystick.setAccelerator(0);
+                    }
+                    break;
+                case 1: // pino 10, flape down
+                    if (currentButtonState[index] == 1) {
+                        Joystick.setAccelerator(1);
+                    } else {
+                        Joystick.setAccelerator(0);
+                    }
+                    break;
+                case 6: // pino 2
                     if (currentButtonState == 1) {
                         Joystick.setXAxis(1);
                     } else {
                         Joystick.setYAxis(0);
                     }
                     break;
-                case 1: // XButtonMinus
+                case 7: //  pino 3
                     if (currentButtonState == 1) {
                         Joystick.setXAxis(-1);
                     } else {
                         Joystick.setXAxis(0);
                     }
                     break;
-                case 2: // YButtonPlus
+                case 8: //  pino 4
                     if (currentButtonState == 1) {
                         Joystick.setYAxis(1);
                     } else {
                         Joystick.setYAxis(0);
                     }
                     break;
-                case 3: // YButton2
+                case 9: // pino 5
                     if (currentButtonState == 1) {
                         Joystick.setYAxis(-1);
                     } else {
                         Joystick.setXAxis(0);
                     }
                     break;
+                default: // demais pinos
+                    Joystick.setButton (0, currentButtonState[index]);
+                    break;
             }
-        lastButtonState[index] = currentButtonState;
+        }
+        lastButtonState[index] = currentButtonState[index];
     }
     delay(10);
  }
