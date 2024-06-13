@@ -35,18 +35,21 @@ int ryAxis_=0;
 int rzAxis_=0;
 int zAxis_=0;
 int rudder_=0;
+
 int lastButton1State=0;
 int lastButton2State=0;
 int lastButton3State=0;
 int lastButton4State=0;
 int lastButton5State=0;
 int lastButton6State=0;
+
 int currentButton1State;
 int currentButton2State;
 int currentButton3State;
 int currentButton4State;
 int currentButton5State;
 int currentButton6State;
+
 int currentButtonState;
 int lastButtonState[4] = {0,0,0,0};
  
@@ -61,6 +64,8 @@ void setup() {
     pinMode(JoyButton3, INPUT_PULLUP);
     pinMode(JoyButton4, INPUT_PULLUP);
     pinMode(JoyButton5, INPUT_PULLUP);
+    pinMode(JoyButton6, INPUT_PULLUP);
+        
     pinMode(XButtonPlus, INPUT_PULLUP);
     pinMode(XButtonMinus, INPUT_PULLUP);
     pinMode(YButtonPlus, INPUT_PULLUP);
@@ -104,42 +109,42 @@ void loop() {
     // Faz leitura dos 6 botões, se estado do botão mudou,
     // atualiza posição do botão no Joystick
 
-    currentButton1State = !digitalRead(joybutton1);
+    currentButton1State = !digitalRead(joyButton1);
     if (currentButton1State != lastButton1State)
     {
         Joystick.setButton (0, currentButton1State);
         lastButton1State = currentButton1State;
     }
     
-    currentButton2State = !digitalRead(joybutton2);
+    currentButton2State = !digitalRead(joyButton2);
     if (currentButton2State != lastButton2State)
     {
         Joystick.setButton (0, currentButton2State);
         lastButton2State = currentButton2State;
     }
 
-    currentButton3State = !digitalRead(joybutton3);
+    currentButton3State = !digitalRead(joyButton3);
     if (currentButton3State != lastButton3State)
     {
         Joystick.setButton (0, currentButton3State);
         lastButton3State = currentButton3State;
     }
 
-    currentButton4State = !digitalRead(joybutton4);
+    currentButton4State = !digitalRead(joyButton4);
     if (currentButton4State != lastButton4State)
     {
         Joystick.setButton (0, currentButton4State);
         lastButton4State = currentButton4State;
     }
 
-    currentButton5State = !digitalRead(joybutton5);
+    currentButton5State = !digitalRead(joyButton5);
     if (currentButton5State != lastButton5State)
     {
         Joystick.setButton (0, currentButton5State);
         lastButton5State = currentButton5State;
     }
 
-    currentButton6State = !digitalRead(joybutton6);
+    currentButton6State = !digitalRead(joyButton6);
     if (currentButton6State != lastButton6State)
     {
         Joystick.setButton (0, currentButton6State);
