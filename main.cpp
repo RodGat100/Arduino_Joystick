@@ -146,28 +146,28 @@ void loop()
                     }
                     break;
                 case 6: // pino 2
-                    if (currentButtonState == 1) {
+                    if (currentButtonState[index] == 1) {
                         Joystick.setXAxis(1);
                     } else {
                         Joystick.setYAxis(0);
                     }
                     break;
                 case 7: //  pino 3
-                    if (currentButtonState == 1) {
+                    if (currentButtonState[index] == 1) {
                         Joystick.setXAxis(-1);
                     } else {
                         Joystick.setXAxis(0);
                     }
                     break;
                 case 8: //  pino 4
-                    if (currentButtonState == 1) {
+                    if (currentButtonState[index] == 1) {
                         Joystick.setYAxis(1);
                     } else {
                         Joystick.setYAxis(0);
                     }
                     break;
                 case 9: // pino 5
-                    if (currentButtonState == 1) {
+                    if (currentButtonState[index] == 1) {
                         Joystick.setYAxis(-1);
                     } else {
                         Joystick.setXAxis(0);
